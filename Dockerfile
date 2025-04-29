@@ -56,7 +56,7 @@ ARG SHELL_OPTS
 ARG DEBIAN_FRONTEND
 
 ARG PACK_LIST="tar automake autoconf gcc git build-essential checkinstall libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev \
-  libc6-dev libbz2-dev libffi-dev wget libtool libshout-dev libmp3lame-dev libxml2-dev pip python3 python3-dev perl perl-dev icecast2"
+  libc6-dev libbz2-dev libffi-dev wget libtool libshout-dev libmp3lame-dev libxml2-dev pip python3 python3-dev perl perl-dev icecast2 ffmpeg ffmpeg-dev"
 
 ENV ENV=~/.profile
 ENV SHELL="/bin/sh"
