@@ -125,8 +125,9 @@ RUN echo "Updating system files "; \
   PHP_BIN="$(command -v ${PHP_VERSION} 2>/dev/null || true)"; \
   PHP_FPM="$(ls /usr/*bin/php*fpm* 2>/dev/null || true)"; \
   pip_bin="$(command -v python3 2>/dev/null || command -v python2 2>/dev/null || command -v python 2>/dev/null || true)"; \
-  py_version="$(command $pip_bin --version | sed 's|[pP]ython ||g' | awk -F '.' '{print $1$2}' | grep '[0-9]' || true)"; \
+  py_version="$([ -n "$pip_bin" ] && $pip_bin --version 2>/dev/null | sed 's|[pP]ython ||g' | awk -F '.' '{print $1$2}' | grep '[0-9]' || echo "0")"; \
   [ "$py_version" -gt "310" ] && pip_opts="--break-system-packages " || pip_opts=""; \
+  [ -n "$pip_bin" ] && [ -n "$pip_opts" ] && $pip_bin install $pip_opts --upgrade pip 2>/dev/null || true; \
   [ -f "/usr/share/zoneinfo/${TZ}" ] && ln -sf "/usr/share/zoneinfo/${TZ}" "/etc/localtime" || true; \
   [ -n "$PHP_BIN" ] && [ -z "$(command -v php 2>/dev/null)" ] && ln -sf "$PHP_BIN" "/usr/bin/php" 2>/dev/null || true; \
   [ -n "$PHP_FPM" ] && [ -z "$(command -v php-fpm 2>/dev/null)" ] && ln -sf "$PHP_FPM" "/usr/bin/php-fpm" 2>/dev/null || true; \
