@@ -19,8 +19,8 @@ dockermgr update icecast
 ## Install and run container
   
 ```shell
-dockerHome="/var/lib/srv/$USER/docker/casjaysdevdocker/icecast/icecast/latest/rootfs"
-mkdir -p "/var/lib/srv/$USER/docker/icecast/rootfs"
+dockerHome="/var/lib/srv/$USER/docker/casjaysdevdocker/icecast/icecast/latest/volumes"
+mkdir -p "/var/lib/srv/$USER/docker/icecast/volumes"
 git clone "https://github.com/dockermgr/icecast" "$HOME/.local/share/CasjaysDev/dockermgr/icecast"
 cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/icecast/rootfs/." "$dockerHome/"
 docker run -d \
@@ -47,8 +47,8 @@ services:
       - TZ=America/New_York
       - HOSTNAME=icecast
     volumes:
-      - "/var/lib/srv/$USER/docker/casjaysdevdocker/icecast/icecast/latest/rootfs/data:/data:z"
-      - "/var/lib/srv/$USER/docker/casjaysdevdocker/icecast/icecast/latest/rootfs/config:/config:z"
+      - "/var/lib/srv/$USER/docker/casjaysdevdocker/icecast/icecast/latest/volumes/data:/data:z"
+      - "/var/lib/srv/$USER/docker/casjaysdevdocker/icecast/icecast/latest/volumes/config:/config:z"
     ports:
       - 80:80
     restart: always
